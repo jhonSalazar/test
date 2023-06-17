@@ -12,7 +12,7 @@ services:
     depends_on:
       - postgresql_db
     networks:
-      - besty-box-net
+      - maximum-net
   postgresql_db:
     image: "postgres:15-alpine3.17"
     restart: always
@@ -25,9 +25,9 @@ services:
     volumes:
       - postgres-db:/data/postgres
     networks:
-      - besty-box-net
+      - maximum-net
 networks:
-  besty-box-net:
+  maximum-net:
     driver: bridge
 volumes:
   postgres-db:
