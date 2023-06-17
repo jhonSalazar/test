@@ -1,0 +1,34 @@
+version: "3.3"
+services:
+  api-maximum:
+    build:
+      context: .
+    container_name: maximum-service
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresql_db
+    networks:
+      - besty-box-net
+  postgresql_db:
+    image: "postgres:15-alpine3.17"
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres-db:/data/postgres
+    networks:
+      - besty-box-net
+networks:
+  besty-box-net:
+    driver: bridge
+volumes:
+  postgres-db:
+    driver: local
